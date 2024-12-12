@@ -52,7 +52,7 @@ class ServerManager
             ],
             [
                 $this->user,
-                "/home/travian/{$this->user}/servers/{$installationData['worldId']}/public",
+                "/travian/{$this->user}/servers/{$installationData['worldId']}/public",
                 "{$installationData['worldId']}.{$this->userData['main_domain']}",
             ],
             $nginxConf
@@ -388,7 +388,7 @@ class ServerManager
 
     private function getGameWorldBaseLocation($worldId = null)
     {
-        return '/home/travian/' . $this->user . '/servers/' . (!is_null($worldId) ? $worldId . '/' : '');
+        return '/travian/' . $this->user . '/servers/' . (!is_null($worldId) ? $worldId . '/' : '');
     }
 
     public function uninstall(Task $task)

@@ -1,7 +1,7 @@
 <?php
 global $indexConfig;
 global $globalConfig;
-$path = '/home/travian/'.WORKING_USER.'/globalConfig.php';
+$path = '/travian/'.WORKING_USER.'/globalConfig.php';
 require($path);
 date_default_timezone_set($globalConfig['staticParameters']['default_timezone']);
 $indexConfig = [

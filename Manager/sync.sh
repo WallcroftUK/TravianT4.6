@@ -15,27 +15,27 @@ reset=`tput sgr0`
 
 if [ "$1" == "config" ]
 then
-    nano /home/travian/$2/servers/$3/include/config.custom.php
+    nano /travian/$2/servers/$3/include/config.custom.php
     exit
 elif [ "$1" == "log" ]
 then
-    nano /home/travian/$2/servers/$3/include/error_log.log
+    nano /travian/$2/servers/$3/include/error_log.log
     exit
 elif [ "$1" == "clearLog" ]
 then
-    cat /dev/null > /home/travian/$2/servers/$3/include/error_log.log
+    cat /dev/null > /travian/$2/servers/$3/include/error_log.log
     echo "Done"
     exit
 elif [ "$1" == "tailLog" ]
 then
-    tail -f /home/travian/$2/servers/$3/include/error_log.log
+    tail -f /travian/$2/servers/$3/include/error_log.log
     exit
 fi
 
 function stop(){
     for user in ${supported_users[@]}
         do
-            baseDir="/home/travian/$user/servers"
+            baseDir="/travian/$user/servers"
             dir=( $(find "$baseDir" -maxdepth 1 -type d -printf '%P\n') )
             for worldId in ${dir[@]}
             do
@@ -102,7 +102,7 @@ function status(){
 function start(){
      for user in ${supported_users[@]}
         do
-            baseDir="/home/travian/$user/servers"
+            baseDir="/travian/$user/servers"
             dir=( $(find "$baseDir" -maxdepth 1 -type d -printf '%P\n') )
             for worldId in ${dir[@]}
             do
@@ -119,7 +119,7 @@ function start(){
 function update_dev(){
     for user in ${supported_users[@]}
     do
-        baseDir="/home/travian/$user/servers"
+        baseDir="/travian/$user/servers"
         dir=( $(find "$baseDir" -maxdepth 1 -type d -printf '%P\n') )
         for worldId in ${dir[@]}
             do
@@ -142,7 +142,7 @@ function update_dev(){
 function update(){
     for user in ${supported_users[@]}
     do
-        baseDir="/home/travian/$user/servers"
+        baseDir="/travian/$user/servers"
         dir=( $(find "$baseDir" -maxdepth 1 -type d -printf '%P\n') )
         for worldId in ${dir[@]}
             do
@@ -161,7 +161,7 @@ function update(){
 function restart(){
     for user in ${supported_users[@]}
     do
-        baseDir="/home/travian/$user/servers"
+        baseDir="/travian/$user/servers"
         dir=( $(find "$baseDir" -maxdepth 1 -type d -printf '%P\n') )
         for worldId in ${dir[@]}
         do
@@ -178,7 +178,7 @@ function restart(){
 function syncPrivate(){
     for user in ${supported_users[@]}
         do
-            baseDir="/home/travian/$user/servers"
+            baseDir="/travian/$user/servers"
             dir=( $(find "$baseDir" -maxdepth 1 -type d -printf '%P\n') )
             for worldId in ${dir[@]}
             do
@@ -235,7 +235,7 @@ case $i in
         shift
     ;;
     --sync-gpack)
-        rsync --chmod=Du=rwx,Dgo=rx,Fu=rw,Fog=r --chown=travian:travian -a --delete "/travian/sections/gpack/" "/home/travian/gpack/"
+        rsync --chmod=Du=rwx,Dgo=rx,Fu=rw,Fog=r --chown=travian:travian -a --delete "/travian/sections/gpack/" "/travian/gpack/"
         shift
     ;;
     --sync-private)
@@ -249,7 +249,7 @@ case $i in
     --show-stat)
         for user in ${supported_users[@]}
         do
-            dir=( $(find "/home/travian/$user/servers" -maxdepth 1 -type d -printf '%P\n') )
+            dir=( $(find "/travian/$user/servers" -maxdepth 1 -type d -printf '%P\n') )
             for worldId in ${dir[@]}
             do
                 mysql -u root "${user:0:8}_$worldId" -s -r -e 'SELECT COUNT(id) as reports_count FROM ndata';
@@ -258,8 +258,8 @@ case $i in
         shift
     ;;
     --sync-global)
-        baseDir="/home/travian/"
-        mkdir -p /home/travian/gpack/
+        baseDir="/travian/"
+        mkdir -p /travian/gpack/
         rsync --chown=travian:travian -a --delete "/travian/sections/gpack/" "$baseDir/gpack/"
 
         for user in ${supported_users[@]}
@@ -273,7 +273,7 @@ case $i in
             mkdir -p $baseDir/$user/api/
             rsync --chmod=Du=rwx,Dgo=rx,Fu=rw,Fog=r --chown=travian:travian -a --delete "/travian/sections/api/" "$baseDir/$user/api/"
 
-            baseDir="/home/travian/$user/servers"
+            baseDir="/travian/$user/servers"
             dir=( $(find "$baseDir" -maxdepth 1 -type d -printf '%P\n') )
             for worldId in ${dir[@]}
             do
@@ -299,13 +299,13 @@ case $i in
         find /travian -name "*.tar.gzz" -delete
 
 
-        find /home -name "*.zip" -not -path "/home/virtfs/*" -delete
-        find /home -name "*.rar" -not -path "/home/virtfs/*" -delete
-        find /home -name "*.gzip" -not -path "/home/virtfs/*" -delete
-        find /home -name "*.gz" -not -path "/home/virtfs/*" -delete
-        find /home -name "*.tar" -not -path "/home/virtfs/*" -delete
-        find /home -name "*.tar.gz" -not -path "/home/virtfs/*" -delete
-        find /home -name "*.tar.gzz" -not -path "/home/virtfs/*" -delete
+        find /home -name "*.zip" -not -path "/virtfs/*" -delete
+        find /home -name "*.rar" -not -path "/virtfs/*" -delete
+        find /home -name "*.gzip" -not -path "/virtfs/*" -delete
+        find /home -name "*.gz" -not -path "/virtfs/*" -delete
+        find /home -name "*.tar" -not -path "/virtfs/*" -delete
+        find /home -name "*.tar.gz" -not -path "/virtfs/*" -delete
+        find /home -name "*.tar.gzz" -not -path "/virtfs/*" -delete
         shift # past argument with no value
     ;;
     *)
