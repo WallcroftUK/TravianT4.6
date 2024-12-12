@@ -115,7 +115,7 @@ use Core\Database\DB;
                                     </div>
                                     <div class="preview">
                                         <div class="label">Preview</div>
-                                        <div id="downloadHeroImagePreview" class="heroImageWrapper " style="background-image: url(https://gpack.example.com/29c89d54/mainPage/img_ltr/scenes/HeroV2/download/heroBackground.jpg);">
+                                        <div id="downloadHeroImagePreview" class="heroImageWrapper " style="background-image: url(https://gpack.xravian.online/29c89d54/mainPage/img_ltr/scenes/HeroV2/download/heroBackground.jpg);">
                                             <img src="hero_body.php?uid=<?= $vars['hero']['uid']; ?>&size=inventory&horse=<?=$vars['hero']['horse'];?>&helmet=<?=$vars['hero']['helmet']?>" class="heroBodyImage heroBodyImage-<?= getDirection(); ?>" alt="<?= T("HeroInventory", "Body" ); ?>"   style="touch-action: none; cursor: inherit";/> 
                                       
                                         </div>
@@ -556,7 +556,7 @@ use Core\Database\DB;
 </div>
 <div id="tab-inventory" class="tab" style="background-color: #3a3c31;
     				color: #5e463a;
-					background-image: url(https://gpack.example.com/29c89d54/mainPage/img_ltr/scenes/HeroV2/heroPageBackground.jpg);background-position: center 50px;
+					background-image: url(https://gpack.xravian.online/29c89d54/mainPage/img_ltr/scenes/HeroV2/heroPageBackground.jpg);background-position: center 50px;
     				background-repeat: no-repeat;">
     <div class="inventoryPageWrapper  ">
 
@@ -751,7 +751,7 @@ use Core\Database\DB;
 </div>
 <div id="tab-attributes" class="tab" style="display:none;background-color: #3a3c31;
     				color: #5e463a;
-					background-image: url(https://gpack.example.com/29c89d54/mainPage/img_ltr/scenes/HeroV2/heroPageBackground.jpg);background-position: center 50px;
+					background-image: url(https://gpack.xravian.online/29c89d54/mainPage/img_ltr/scenes/HeroV2/heroPageBackground.jpg);background-position: center 50px;
     				background-repeat: no-repeat;">
     <div id="content1" class="heroV2Attributes1">
         <div id="heroV2" class="scene">
@@ -759,7 +759,7 @@ use Core\Database\DB;
                 <div class="stats">
                     <div class="name">
                         <i class="attributeHealth_medium"
-                            style=" background-image: url(https://gpack.example.com/29c89d54/mainPage/img_ltr/general/heroV2/attributeSpeed_medium.png);width: 23px;height: 24px;"></i><span>Health</span>
+                            style=" background-image: url(https://gpack.xravian.online/29c89d54/mainPage/img_ltr/general/heroV2/attributeSpeed_medium.png);width: 23px;height: 24px;"></i><span>Health</span>
                     </div>
                     <div class="progressBar preventMobileSwipeNavigation">
                         <div class="bar">
@@ -778,7 +778,7 @@ use Core\Database\DB;
                     </div>
                     <div class="name">
                         <i class="attributeExperience_medium"
-                            style=" background-image: url(https://gpack.example.com/29c89d54/mainPage/img_ltr/general/heroV2/attributeExperience_medium.png);width: 23px;height: 24px;"></i><span>Experience</span>
+                            style=" background-image: url(https://gpack.xravian.online/29c89d54/mainPage/img_ltr/general/heroV2/attributeExperience_medium.png);width: 23px;height: 24px;"></i><span>Experience</span>
                     </div>
                     <div class="progressBar preventMobileSwipeNavigation">
                         <div class="bar">
@@ -793,7 +793,7 @@ use Core\Database\DB;
                     </div>
                     <div class="name">
                         <i class="attributeSpeed_medium"
-                            style=" background-image: url(https://gpack.example.com/29c89d54/mainPage/img_ltr/general/heroV2/attributeHealth_medium.png);width: 23px;height: 24px;"></i><span>Speed</span>
+                            style=" background-image: url(https://gpack.xravian.online/29c89d54/mainPage/img_ltr/general/heroV2/attributeHealth_medium.png);width: 23px;height: 24px;"></i><span>Speed</span>
                     </div>
                     <div class="value speedValue">
                         <svg viewBox="0 0 10 7.75" class="arrowDouble"
@@ -884,7 +884,7 @@ use Core\Database\DB;
                         <div class="pointsAvailable">0</div>
                         <div class="name">
                             <i class="attributeStrength_medium"
-                                style="background-image: url(https://gpack.example.com/29c89d54/mainPage/img_ltr/general/heroV2/attributeStrength_medium.png);width: 24px;height: 22px;"></i>
+                                style="background-image: url(https://gpack.xravian.online/29c89d54/mainPage/img_ltr/general/heroV2/attributeStrength_medium.png);width: 24px;height: 22px;"></i>
                             <span>Fighting strength</span>
                         </div>
                         <div class="progressBar preventMobileSwipeNavigation">
@@ -904,7 +904,7 @@ use Core\Database\DB;
                         </div>
                         <div class="name">
                             <i class="attributeOffBonus_medium"
-                                style="background-image: url(https://gpack.example.com/29c89d54/mainPage/img_ltr/general/heroV2/attributeOffBonus_medium.png);width: 24px;height: 22px;"></i>
+                                style="background-image: url(https://gpack.xravian.online/29c89d54/mainPage/img_ltr/general/heroV2/attributeOffBonus_medium.png);width: 24px;height: 22px;"></i>
                             <span>Off bonus</span>
                         </div>
                         <div class="progressBar preventMobileSwipeNavigation">
@@ -925,7 +925,7 @@ use Core\Database\DB;
                         </div>
                         <div class="name">
                             <i class="attributeDefBonus_medium"
-                                style="background-image: url(https://gpack.example.com/29c89d54/mainPage/img_ltr/general/heroV2/attributeDefBonus_medium.png);width: 24px;height: 22px;"></i>
+                                style="background-image: url(https://gpack.xravian.online/29c89d54/mainPage/img_ltr/general/heroV2/attributeDefBonus_medium.png);width: 24px;height: 22px;"></i>
                             <span>Def bonus</span>
                         </div>
                         <div class="progressBar preventMobileSwipeNavigation">
@@ -946,7 +946,7 @@ use Core\Database\DB;
                         </div>
                         <div class="name">
                             <i class="attributeRessourceBonus_medium"
-                                style="background-image: url(https://gpack.example.com/29c89d54/mainPage/img_ltr/general/heroV2/attributeRessourceBonus_medium.png);width: 24px;height: 22px;"></i>
+                                style="background-image: url(https://gpack.xravian.online/29c89d54/mainPage/img_ltr/general/heroV2/attributeRessourceBonus_medium.png);width: 24px;height: 22px;"></i>
                             <span>Resource production</span>
                         </div>
                         <div class="progressBar preventMobileSwipeNavigation">
@@ -991,7 +991,7 @@ use Core\Database\DB;
             <div class="attributeBox">
                 <div class="heroState">
                     <i class="statusHome_medium"
-                        style="background-image: url(https://gpack.example.com/29c89d54/mainPage/img_ltr/general/heroV2/statusHome_medium.png);width: 24px;height: 22px;"></i>
+                        style="background-image: url(https://gpack.xravian.online/29c89d54/mainPage/img_ltr/general/heroV2/statusHome_medium.png);width: 24px;height: 22px;"></i>
                     <div>
                         <span>Hero is currently in village <a href="karte.php" data-reactroot=""><?=$vars['hero']['vname']; ?></a>.</span>
                     </div>
@@ -1010,7 +1010,7 @@ use Core\Database\DB;
 </div>
 <div id="tab-apperance" class="tab" style="display:none;background-color: #3a3c31;
     				color: #5e463a;
-					background-image: url(https://gpack.example.com/29c89d54/mainPage/img_ltr/scenes/HeroV2/heroPageBackground.jpg);background-position: center 50px;
+					background-image: url(https://gpack.xravian.online/29c89d54/mainPage/img_ltr/scenes/HeroV2/heroPageBackground.jpg);background-position: center 50px;
     				background-repeat: no-repeat;">
     <div id="content2" class="heroV2Appearance">
         <div id="heroV2" class="scene">
@@ -1781,7 +1781,7 @@ use Core\Database\DB;
                 //     }
                 // }
 
-                // document.getElementsByClassName("hero female")[0].children[0].src="https://gpack.example.com/29c89d54/mainPage/img_ltr/scenes/HeroV2/image/body/2.png";
+                // document.getElementsByClassName("hero female")[0].children[0].src="https://gpack.xravian.online/29c89d54/mainPage/img_ltr/scenes/HeroV2/image/body/2.png";
                 
                 if(equipmentName.className.includes("empty"))
                 {

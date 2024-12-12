@@ -13,10 +13,10 @@ use Core\Helper\PreferencesHelper;
     <meta name="content-language" content="<?=get_locale(); ?>"/>
 
 
-    <link href="https://gpack.example.com/29c89d54/mainPage/css/default_compressed.css" rel="stylesheet" type="text/css"/>
-    <link href="https://gpack.example.com/29c89d54/mainPage/css/default_compressed.css" rel="stylesheet" type="text/css"/>
+    <link href="https://gpack.xravian.online/29c89d54/mainPage/css/default_compressed.css" rel="stylesheet" type="text/css"/>
+    <link href="https://gpack.xravian.online/29c89d54/mainPage/css/default_compressed.css" rel="stylesheet" type="text/css"/>
     <?php if (is_lowres()): ?>
-        <link href="https://gpack.example.com/29c89d54/mainPage/css/default_compressed.css" rel="stylesheet" type="text/css"/>
+        <link href="https://gpack.xravian.online/29c89d54/mainPage/css/default_compressed.css" rel="stylesheet" type="text/css"/>
     <?php endif; ?>
 
 
