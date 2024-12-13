@@ -1,6 +1,10 @@
 # TravianT4.6
 A really nice travian script.
 
+#Wallcroft: 
+BUT ITS PAIN IN MY BRAIN ITS MIX OF APACHE AND NGINX I HAVE LIKE 5% DONE 
+AAAAAAHHHHHHHHHHHHHHHH
+
 Needs
 php 7.3-7.4
 geoip php extension
