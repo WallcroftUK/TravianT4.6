@@ -6,7 +6,7 @@ After=mysqld.service
 [Service]
 User=travian
 Type=forking
-ExecStart=/travian/sections/servers/dev/include/molonlave_dev.service.php
+ExecStart=/travian/molonlave/servers/dev/include/molonlave_dev.service.php
 Restart=always
 
 [Install]
