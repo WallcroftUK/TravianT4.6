@@ -19,7 +19,7 @@ class TaskQueue
             $data = json_encode($data);
         }
         $db = GlobalDB::getInstance();
-        $db->query("INSERT INTO taskQueue (type, data, description, time) VALUES ('$type', '" . $db->real_escape_string($data) . "', '$description', " . time() . ")");
+        $db->query("INSERT INTO taskqueue (type, data, description, time) VALUES ('$type', '" . $db->real_escape_string($data) . "', '$description', " . time() . ")");
     }
 
 }

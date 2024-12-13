@@ -43,12 +43,12 @@ class Task
 
     public function setAsCompleted()
     {
-        $this->db->query("UPDATE taskQueue SET status='done' WHERE id={$this->id}");
+        $this->db->query("UPDATE taskqueue SET status='done' WHERE id={$this->id}");
     }
 
     public function setAsFailed($reason)
     {
         $reason = $this->db->real_escape_string($reason);
-        $this->db->query("UPDATE taskQueue SET status='failed', failReason='$reason' WHERE id={$this->id}");
+        $this->db->query("UPDATE taskqueue SET status='failed', failReason='$reason' WHERE id={$this->id}");
     }
 }

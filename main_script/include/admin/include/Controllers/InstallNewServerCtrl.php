@@ -291,7 +291,7 @@ class InstallNewServerCtrl
             if ($gameWorld->num_rows) {
                 $gameWorld = $gameWorld->fetch_assoc();
                 if (in_array($gameWorld['worldId'], ['dev', 'test']) || $gameWorld['finished'] == 1 || $gameWorld['startTime'] > time()) {
-                    $count = (int)$db->fetchScalar("SELECT COUNT(id) FROM taskQueue where data='" . $db->real_escape_string($data) . "' AND status='pending'");
+                    $count = (int)$db->fetchScalar("SELECT COUNT(id) FROM taskqueue where data='" . $db->real_escape_string($data) . "' AND status='pending'");
                     if ($count === 0) {
                         TaskQueue::addTask(TaskQueue::TASK_UNINSTALL, $data, "Uninstalling server {$_GET['worldId']}");
                         WebService::redirect('admin.php?action=installNewServer&deletionQueued=1');
@@ -333,7 +333,7 @@ class InstallNewServerCtrl
                 }
             }
         }
-        $this->vars['tasks'] = $db->query("SELECT * FROM taskQueue ORDER BY id DESC LIMIT 10")->fetch_all(MYSQLI_ASSOC);
+        $this->vars['tasks'] = $db->query("SELECT * FROM taskqueue ORDER BY id DESC LIMIT 10")->fetch_all(MYSQLI_ASSOC);
         $this->vars['gameWorlds'] = $db->query("SELECT * FROM gameServers ORDER BY finished=1 DESC, startTime ASC")->fetch_all(MYSQLI_ASSOC);
         $user = basename(dirname(GLOBAL_CONFIG_FILE));
         foreach ($this->vars['gameWorlds'] as &$gameWorld) {

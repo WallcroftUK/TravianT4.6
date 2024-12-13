@@ -41,7 +41,7 @@ class TaskRunner
             $databaseDetails['charset']
         );
         $serverManager = new ServerManager($db, $user, $userData);
-        $tasks = $db->query("SELECT * FROM taskQueue WHERE status='pending' ORDER BY id ASC");
+        $tasks = $db->query("SELECT * FROM taskqueue WHERE status='pending' ORDER BY id ASC");
         while ($task = $tasks->fetch_assoc()) {
             $task = new Task($db, $task);
             switch ($task->getType()) {
