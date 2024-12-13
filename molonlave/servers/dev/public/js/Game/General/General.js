@@ -1,3 +1,17 @@
+// Number.isFinite polyfill for IE11
+Number.isFinite = Number.isFinite || function(value) {
+    return typeof value === 'number' && isFinite(value);
+};
+
+// Object.values polyfill
+var valuesPolyfill = function values (object) {
+    return Object.keys(object).map(function(e) {
+        return object[e];
+    });
+};
+
+Object.values = Object.values || valuesPolyfill;
+
 // Object.assign polyfill for Internet Explorer
 if (typeof Object.assign !== 'function') {
     Object.defineProperty(Object, 'assign', {
