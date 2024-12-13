@@ -18,7 +18,7 @@ function handle_v1_api($section, $action)
         http_response_code(400);
     }
     header("Content-Type: application/json");
-    header("Access-Control-Allow-Origin: *");
+    //header("Access-Control-Allow-Origin: *");
     echo json_encode($response);
     exit();
 }
@@ -43,7 +43,7 @@ if (false !== $pos = strpos($uri, '?')) {
 $uri = rawurldecode($uri);
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
 if ($httpMethod == 'OPTIONS') {
-    header("Access-Control-Allow-Origin: *");
+    //header("Access-Control-Allow-Origin: *");
     header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
     header('Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding');
     http_response_code(200);
