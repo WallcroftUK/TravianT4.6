@@ -1,19 +1,38 @@
 <?php
 namespace Core;
-define("BOT_TOKEN", trim(file_get_contents("/travian/telegram_bot.token")));
+
+/**
+ * Sends notifications to Discord via webhook.
+ * Reads the webhook URL from /travian/discord_webhook.url
+ */
+define("DISCORD_WEBHOOK_URL", @trim(@file_get_contents("/travian/discord_webhook.url")) ?: "");
+
 class Notification
 {
+    /**
+     * Send a markdown-like message to Discord. The $db and $pin parameters are
+     * kept for compatibility with existing calls; they are not used for Discord.
+     */
     public static function markdown(DB $db, $text, $pin = false)
     {
-        $groupId = $db->query("SELECT notificationGroupId FROM paymentConfig")->fetch_row()[0];
-        $static = 'https://api.telegram.org/bot' . BOT_TOKEN . '/sendMessage?chat_id=' . $groupId . '&text=' . urlencode($text) . '&parse_mode=markdown';
-        $message_id = null;
-        $response = @file_get_contents($static);
-        if (!empty($response)) {
-            $response = json_decode($response, true);
-            $message_id = $response['result']['message_id'];
+        $webhook = DISCORD_WEBHOOK_URL;
+        if (empty($webhook)) {
+            return; // No webhook configured
         }
-        if ($message_id == null || !$pin) return;
-        file_get_contents('https://api.telegram.org/bot' . BOT_TOKEN . '/pinChatMessage?chat_id=' . $groupId . '&message_id=' . $message_id);
+
+        $payload = json_encode([
+            'content' => (string)$text,
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+        $context = stream_context_create([
+            'http' => [
+                'method'  => 'POST',
+                'header'  => "Content-Type: application/json\r\n",
+                'content' => $payload,
+                'timeout' => 5,
+            ],
+        ]);
+
+        @file_get_contents($webhook, false, $context);
     }
 }
