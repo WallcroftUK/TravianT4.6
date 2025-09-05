@@ -136,9 +136,14 @@ class ServerManager
         $db->query("INSERT INTO `config`(`startTime`, `map_size`, `worldUniqueId`, `installed`, `loginInfoTitle`, `loginInfoHTML`, `message`) VALUES ({$installationData['startTime']}, {$installationData['mapSize']}, $worldUniqueId, 0, '', '', '')");
         $db->close();
         {
-            $automationDestination = "{$script_path}include/{$processName}.php";
-            shell_exec("chown travian:travian $automationDestination");
+            // Ensure include directory exists, write file first, then chown
+            $includeDir = "{$script_path}include";
+            if (!is_dir($includeDir)) {
+                @mkdir($includeDir, 0755, true);
+            }
+            $automationDestination = "{$includeDir}/{$processName}.php";
             file_put_contents($automationDestination, file_get_contents($script_path . "/include/Automation.php"));
+            @shell_exec("chown travian:travian $automationDestination");
         }
         $shell_content = str_replace(
             [
