@@ -12,10 +12,10 @@ $connection = [
     'auto_reinstall_start_after' => '[AUTO_REINSTALL_START_AFTER]',
     'engine_filename' => '[ENGINE_FILENAME]',
     'database' => [
-        'hostname' => 'localhost',
-        'username' => 'root',
-        'password' => '',
-        'database' => 'a2b',
+        'hostname' => '[DATABASE_HOST]',
+        'username' => '[DATABASE_USERNAME]',
+        'password' => '[DATABASE_PASSWORD]',
+        'database' => '[DATABASE_DATABASE]',
         'charset' => 'utf8mb4',
     ],
 ];
