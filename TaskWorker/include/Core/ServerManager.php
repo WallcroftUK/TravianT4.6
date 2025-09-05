@@ -31,8 +31,13 @@ class ServerManager
     {
         $installationData = $task->getData();
         if ($this->doesSubDomainExists($installationData['worldId'])) {
-            $task->setAsFailed('Subdomain already exists.');
-            return;
+            // Allow overwrite when explicitly requested by task data: { force: 1 }
+            if (!empty($installationData['force'])) {
+                @unlink("/etc/nginx/conf.d/{$this->user}_{$installationData['worldId']}.conf");
+            } else {
+                $task->setAsFailed('Subdomain already exists.');
+                return;
+            }
         }
         $dbPassword = generateStrongPassword(36);
         $gameWorldUrl = 'http://' . sprintf("%s.%s", $installationData['worldId'], $this->userData['main_domain']) . '/';
