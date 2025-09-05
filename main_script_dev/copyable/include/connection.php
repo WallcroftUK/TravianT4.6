@@ -3,7 +3,7 @@ global $connection;
 $connection = [
     'speed' => '[GAME_SPEED]',
     'round_length' => '[GAME_ROUND_LENGTH]',
-    'worldId' => 'Onlie Mulitplayer',
+    'worldId' => '[SETTINGS_WORLD_ID]',
     'secure_hash_code' => '[SECURE_HASH_CODE]',
     'title' => '[TITLE]',
     'gameWorldUrl' => '[GAME_WORLD_URL]',
