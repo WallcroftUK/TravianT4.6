@@ -66,7 +66,7 @@ class ServerManager
         $databaseName = sprintf("%s_%s", substr($this->user, 0, 8), $installationData['worldId']);
         // Create database with $databaseName $dbPassword
         echo shell_exec("mysql -u root -e \"CREATE DATABASE $databaseName\"");
-        echo shell_exec("mysql -u root -e \"CREATE USER {$databaseName} IDENTIFIED BY '{$dbPassword}'\"");
+        echo shell_exec("mysql -u root -e \"CREATE USER {$databaseName} IDENTIFIED WITH mysql_native_password BY '{$dbPassword}'\"");
         echo shell_exec("mysql -u root -e \"GRANT ALL PRIVILEGES ON {$databaseName}.* TO {$databaseName}\"");
         file_put_contents($envFile, str_replace('\'%[IS_DEV]%\'', $installationData['worldId'] == 'dev' ? 'true' : 'false', file_get_contents($envFile)));
         $order = [
