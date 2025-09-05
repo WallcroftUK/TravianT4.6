@@ -72,8 +72,8 @@ class ServerManager
         // Create database with $databaseName $dbPassword
         // Create DB and app user idempotently (expects root creds via /root/.my.cnf)
         echo shell_exec("mysql -u root -e \"CREATE DATABASE IF NOT EXISTS $databaseName\"");
-        echo shell_exec("mysql -u root -e \"CREATE USER IF NOT EXISTS '${databaseName}'@'localhost' IDENTIFIED BY '${dbPassword}'\"");
-        echo shell_exec("mysql -u root -e \"GRANT ALL PRIVILEGES ON ${databaseName}.* TO '${databaseName}'@'localhost'\"");
+        echo shell_exec("mysql -u root -e \"CREATE USER IF NOT EXISTS {$databaseName} IDENTIFIED WITH mysql_native_password BY '${dbPassword}'\"");
+        echo shell_exec("mysql -u root -e \"GRANT ALL PRIVILEGES ON {$databaseName}.* TO {$databaseName}\"");
         echo shell_exec("mysql -u root -e \"FLUSH PRIVILEGES\"");
         file_put_contents($envFile, str_replace('\'%[IS_DEV]%\'', $installationData['worldId'] == 'dev' ? 'true' : 'false', file_get_contents($envFile)));
         $order = [
