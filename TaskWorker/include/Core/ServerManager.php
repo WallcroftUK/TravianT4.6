@@ -72,8 +72,8 @@ class ServerManager
         // Create database with $databaseName $dbPassword
         // Create DB and app user idempotently (expects root creds via /root/.my.cnf)
         echo shell_exec("mysql -u root -e \"CREATE DATABASE IF NOT EXISTS $databaseName\"");
-        echo shell_exec("mysql -u root -e \"CREATE USER IF NOT EXISTS {$databaseName} IDENTIFIED WITH mysql_native_password BY '${dbPassword}'\"");
-        echo shell_exec("mysql -u root -e \"GRANT ALL PRIVILEGES ON {$databaseName}.* TO {$databaseName}\"");
+        echo shell_exec("mysql -u root -e \"CREATE USER IF NOT EXISTS '${databaseName}'@'localhost' IDENTIFIED WITH mysql_native_password BY '${dbPassword}'\"");
+        echo shell_exec("mysql -u root -e \"GRANT ALL PRIVILEGES ON ${databaseName}.* TO '${databaseName}'@'localhost'\"");
         echo shell_exec("mysql -u root -e \"FLUSH PRIVILEGES\"");
         file_put_contents($envFile, str_replace('\'%[IS_DEV]%\'', $installationData['worldId'] == 'dev' ? 'true' : 'false', file_get_contents($envFile)));
         $order = [
@@ -136,14 +136,9 @@ class ServerManager
         $db->query("INSERT INTO `config`(`startTime`, `map_size`, `worldUniqueId`, `installed`, `loginInfoTitle`, `loginInfoHTML`, `message`) VALUES ({$installationData['startTime']}, {$installationData['mapSize']}, $worldUniqueId, 0, '', '', '')");
         $db->close();
         {
-            // Ensure include directory exists, write file first, then chown
-            $includeDir = "{$script_path}include";
-            if (!is_dir($includeDir)) {
-                @mkdir($includeDir, 0755, true);
-            }
-            $automationDestination = "{$includeDir}/{$processName}.php";
+            $automationDestination = "{$script_path}include/{$processName}.php";
+            shell_exec("chown travian:travian $automationDestination");
             file_put_contents($automationDestination, file_get_contents($script_path . "/include/Automation.php"));
-            @shell_exec("chown travian:travian $automationDestination");
         }
         $shell_content = str_replace(
             [
