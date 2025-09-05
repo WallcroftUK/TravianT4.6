@@ -364,11 +364,46 @@ class ServerManager
     private function addDnsRecord($subdomain){
         if($this->userData['type'] == 'cloudns'){
             $dns = $this->getDnsManager();
+            // Idempotent: if an A record exists, update it; otherwise create
+            $existing = $dns->dnsListRecords($this->userData['main_domain'], $subdomain);
+            if (!empty($existing) && is_array($existing)) {
+                foreach ($existing as $record) {
+                    if (isset($record['type']) && strtoupper($record['type']) === 'A') {
+                        // Update IP and TTL; ensure enabled
+                        $dns->dnsModifyRecord($this->userData['main_domain'], $record['id'], $record['type'], $subdomain, $this->userData['ip'], 3600);
+                        $dns->dnsChangeRecordStatus($this->userData['main_domain'], $record['id'], true);
+                        return;
+                    }
+                }
+            }
             $result = $dns->dnsAddRecord($this->userData['main_domain'], 'A', $subdomain, $this->userData['ip'], 3600);
             $dns->dnsChangeRecordStatus($this->userData['main_domain'], $result['data']['id'], true);
         } else {
             $dns = new \Cloudflare\API\Endpoints\DNS($this->getDnsManager());
-            $dns->addRecord($this->userData['zone_id'], 'A', sprintf('%s.%s', $subdomain, $this->userData['main_domain']), $this->userData['ip'], '3600', true);
+            $fullName = sprintf('%s.%s', $subdomain, $this->userData['main_domain']);
+            // Idempotent: if exists, update; else add
+            $records = $dns->listRecords($this->userData['zone_id'], 'A', $fullName);
+            if (isset($records->result) && is_array($records->result) && count($records->result) > 0) {
+                // Update first matching record, delete duplicates if any
+                $first = true;
+                foreach ($records->result as $rec) {
+                    if ($first) {
+                        $dns->updateRecordDetails($this->userData['zone_id'], $rec->id, [
+                            'type'    => 'A',
+                            'name'    => $fullName,
+                            'content' => $this->userData['ip'],
+                            'ttl'     => 3600,
+                            'proxied' => true,
+                        ]);
+                        $first = false;
+                    } else {
+                        // clean up duplicates
+                        $dns->deleteRecord($this->userData['zone_id'], $rec->id);
+                    }
+                }
+            } else {
+                $dns->addRecord($this->userData['zone_id'], 'A', $fullName, $this->userData['ip'], '3600', true);
+            }
         }
     }
 
