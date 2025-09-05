@@ -331,17 +331,23 @@ class ServerManager
 
     public function createBashService($name, $content)
     {
+        // Ensure per-user services directory exists
+        $servicesDir = "/travian/services/{$this->user}";
+        if (!is_dir($servicesDir)) {
+            @mkdir($servicesDir, 0755, true);
+            @shell_exec("chown travian:travian $servicesDir");
+        }
         $processes = [
             "rm -rf /etc/systemd/system/{$this->getBashName($name)}",
-            "rm -rf /travian/services/{$this->user}/{$this->getBashName($name)}",
-            "touch /travian/services/{$this->user}/{$this->getBashName($name)}",
+            "rm -rf $servicesDir/{$this->getBashName($name)}",
+            "touch $servicesDir/{$this->getBashName($name)}",
         ];
         foreach ($processes as $cmd) {
             shell_exec($cmd);
         }
-        file_put_contents("/travian/services/{$this->user}/{$this->getBashName($name)}", $content);
-        shell_exec(sprintf('chown travian:travian %s', "/travian/services/{$this->user}/{$this->getBashName($name)}"));
-        shell_exec("ln /travian/services/{$this->user}/{$this->getBashName($name)} /etc/systemd/system/{$this->getBashName($name)}");
+        file_put_contents("$servicesDir/{$this->getBashName($name)}", $content);
+        shell_exec(sprintf('chown travian:travian %s', "$servicesDir/{$this->getBashName($name)}"));
+        shell_exec("ln $servicesDir/{$this->getBashName($name)} /etc/systemd/system/{$this->getBashName($name)}");
         shell_exec('systemctl daemon-reload');
     }
 
