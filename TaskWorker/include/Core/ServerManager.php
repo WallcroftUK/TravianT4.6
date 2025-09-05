@@ -70,9 +70,11 @@ class ServerManager
         shell_exec("rsync --chown=travian:travian -a --delete \"$from_location\" \"$to_location\"");
         $databaseName = sprintf("%s_%s", substr($this->user, 0, 8), $installationData['worldId']);
         // Create database with $databaseName $dbPassword
-        echo shell_exec("mysql -u root -e \"CREATE DATABASE $databaseName\"");
-        echo shell_exec("mysql -u root -e \"CREATE USER {$databaseName} IDENTIFIED BY '{$dbPassword}'\"");
-        echo shell_exec("mysql -u root -e \"GRANT ALL PRIVILEGES ON {$databaseName}.* TO {$databaseName}\"");
+        // Create DB and app user idempotently (expects root creds via /root/.my.cnf)
+        echo shell_exec("mysql -u root -e \"CREATE DATABASE IF NOT EXISTS $databaseName\"");
+        echo shell_exec("mysql -u root -e \"CREATE USER IF NOT EXISTS '${databaseName}'@'localhost' IDENTIFIED BY '${dbPassword}'\"");
+        echo shell_exec("mysql -u root -e \"GRANT ALL PRIVILEGES ON ${databaseName}.* TO '${databaseName}'@'localhost'\"");
+        echo shell_exec("mysql -u root -e \"FLUSH PRIVILEGES\"");
         file_put_contents($envFile, str_replace('\'%[IS_DEV]%\'', $installationData['worldId'] == 'dev' ? 'true' : 'false', file_get_contents($envFile)));
         $order = [
             '[PAYMENT_FEATURES_TOTALLY_DISABLED]',
