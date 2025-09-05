@@ -130,8 +130,8 @@ class ServerManager
         $db->close();
         {
             $automationDestination = "{$script_path}include/{$processName}.php";
-            shell_exec("chown travian:travian $automationDestination");
             file_put_contents($automationDestination, file_get_contents($script_path . "/include/Automation.php"));
+            shell_exec("chown travian:travian $automationDestination");
         }
         $shell_content = str_replace(
             [
